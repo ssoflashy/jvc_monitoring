@@ -40,8 +40,7 @@ class Forum:
 
 		nb_co = re.search(self.pattern, temp)
 
-
-		return nb_co[0]
+		return nb_co.group(0)
 
 def main():
 	logging.basicConfig(filename="logs.log", level=logging.ERROR)
