@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 
 from bs4 import BeautifulSoup
-from urllib.request import urlopen
 from time import sleep
 import sqlite3
 import datetime
@@ -25,8 +24,7 @@ class Forum:
 		c = connection.cursor()
 		now = datetime.datetime.today()
 		text = "INSERT INTO {0}(datetime, nb_co) VALUES('{1}', '{2}')".format(self.forum, now, self.recup_co())
-		print(text)
-		print(self.forum, self.recup_co())
+		print(now, self.forum, self.recup_co())
 		c.execute(text)
 		connection.commit()
 		connection.close()
@@ -38,12 +36,10 @@ class Forum:
 		page = BeautifulSoup(page_html, 'html.parser') 
 		resultat = page.select(".nb-connect-fofo")
 
-		print(resultat)
 		temp = str(resultat) #stockage de la ligne avec le nombre de co
 
 		nb_co = re.search(self.pattern, temp)
 
-		print(nb_co[0])
 
 		return nb_co[0]
 
